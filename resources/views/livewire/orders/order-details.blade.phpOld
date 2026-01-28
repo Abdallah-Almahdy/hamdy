@@ -1,0 +1,188 @@
+<div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr class="bg-gradient-info">
+                <th scope="row ">معلومات الطلب</th>
+                <th scope=""> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">الرقم</th>
+                <td>{{ $orderData->id }}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">الحالة</th>
+                <td>
+                    @if ($orderData->status == 0)
+                        @if ($orderData->orderTracking[0]->status == 0)
+                            اوردر جديد
+                        @elseif ($orderData->orderTracking[0]->status == 1)
+                            يتم تجهيز الاوردر
+                        @elseif ($orderData->orderTracking[0]->status == 2)
+                            يتم توصيل الاوردر
+                        @endif
+                    @elseif ($orderData->status == 1)
+                        اوردر ناجح وتم التوصيل
+                    @elseif ($orderData->status == 2)
+                        فشل الاوردر
+                    @endif
+
+
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">تاريخ الطلب </th>
+                <td>{{ \Carbon\Carbon::parse($orderData->created_at)->format('Y-m-d H:i') }}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">المبلغ الكلي </th>
+                <td>{{ $orderData->totalPrice }}جم </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table mb-5 table-hover">
+        <thead>
+            <tr class="bg-gradient-info">
+                <th scope="row ">معلومات العميل</th>
+                <td> </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">اسم العميل</th>
+                <td>{{ $userInfo->firstName . ' ' . $userInfo->lastName }}</td>
+
+            </tr>
+            <tr>
+
+
+                <th scope="row">عنوانه</th>
+                @if ($orderData->address == 1)
+                    <td>
+                        {{ $userInfo->addressCountry . ', ' . $userInfo->addresscity }}
+
+                        @if ($userInfo->addressstreet)
+                            , {{ $userInfo->addressstreet }}
+                        @endif
+
+                        {{ ' ' . $userInfo->addressbuildingNumber }}
+
+                        @if ($userInfo->addressfloorNumber)
+                            , الدور: {{ $userInfo->addressfloorNumber }}
+                        @endif
+
+                        , رقم الشقة: {{ $userInfo->addressApartmentNumber }}
+                        @if ($userInfo->disSign)
+                            , علامة مميزة: {{ $userInfo->disSign }}
+                        @endif
+                    </td>
+                @elseif ($orderData->address == 2)
+                    <td>
+                        {{ $userInfo->addressCountry2 . ', ' . $userInfo->addresscity2 }}
+
+                        @if ($userInfo->addressstreet2)
+                            , {{ $userInfo->addressstreet2 }}
+                        @endif
+
+                        {{ ' ' . $userInfo->addressbuildingNumber2 }}
+
+                        @if ($userInfo->addressfloorNumber2)
+                            , الدور: {{ $userInfo->addressfloorNumber2 }}
+                        @endif
+
+                        , رقم الشقة: {{ $userInfo->addressApartmentNumber2 }}
+                        @if ($userInfo->disSign2)
+                            , علامة مميزة: {{ $userInfo->disSign2 }}
+                        @endif
+
+                    </td>
+            </tr>
+            @endif
+            </tr>
+
+            <tr>
+                <th scope="row">طريقة الدفع</th>
+                <td>
+                    @if ($orderData->payment_method == 0)
+                        كاش
+                    @elseif($orderData->payment_method == 1)
+                        فيزا
+                    @elseif($orderData->payment_method == 2)
+                        محفظة
+                    @elseif($orderData->payment_method == 3)
+                        اسنتا باي
+                    @else
+                        غير محدد
+                    @endif
+                </td>
+            </tr>
+
+            <tr>
+                <th scope="row">رقم التليفون</th>
+                <td>
+                    {{ preg_replace('/(\d{3})(\d{3})(\d{4})/', '$1-$2-$3', $userInfo->phonenum) }}
+                </td>
+
+            </tr>
+
+        </tbody>
+    </table>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr class="bg-gradient-primary">
+                <th scope="col">اسم المنتج</th>
+                <th scope="col">الصورة</th>
+                <th scope="col">القسم</th>
+                <th scope="col">السعر</th>
+                <th scope="col">الكمية</th>
+                <th scope="col">الإجمالي</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach ($orderProdutcs as $product)
+                <tr>
+                    <td>{{ $product['porductData']->name }}</td>
+                    <td>
+                        <img width="30" height="30"
+                            src="{{ asset('uploads/' . $product['porductData']->photo) }}" alt="image"
+                            width="100px" height="100px">
+                    </td>
+
+
+                    {{-- <img class="rounded-circle" width="50" height="50"
+                    src="{{ asset('uploads/' . $product->photo) ?? asset('path/to/default-image.jpg') }}"
+                    alt="Product image" style="cursor: pointer;"> --}}
+
+
+
+                    <td>{{ $product['porductData']->section->name }}</td>
+                    <td>{{ $product['porductData']->price }}</td>
+                    <td>{{ $product['porductCount'] }}</td>
+                    <td>{{ $product['porductTotalPrice'] }}</td>
+                <tr>
+            @endforeach
+            <tr>
+
+                <td colspan="5"> </td>
+                <td>{{ $orderData['totalPrice'] }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+    @if ($orderData->status == 0)
+        @if ($orderData->orderTracking[0]->status == 0)
+            <a href="{{ route('orders.print', $orderData->id) }}" class="btn btn-primary">طباعة إيصال تحضير</a>
+        @endif
+    @endif
+
+</div>
