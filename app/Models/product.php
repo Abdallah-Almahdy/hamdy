@@ -28,6 +28,10 @@ class  product extends Model
         'purchase_count',
         'offer_rate',
         'bar_code',
+        'best_saller',
+        'come_first',
+        'is_avaliable',
+        
     ];
 
 
