@@ -23,7 +23,7 @@ class Edit extends Component
     public $comeFirst;
     public $active;
     public $is_avaliable;
-
+    public $stockQnt;
     public function mount($data)
     {
 
@@ -76,7 +76,7 @@ class Edit extends Component
             }
         }
 
-        $product->qnt = $this->qnt;
+        $product->qnt = $this->stockQnt;
         $product->best_saller = $this->bestSaller;
         $product->come_first = $this->comeFirst;
         $product->is_avaliable = $this->is_avaliable;
@@ -88,7 +88,7 @@ class Edit extends Component
         if ($config->withQnt == 'yes') {
 
             if ($config->qntStatus == 'unavailable') {
-                if ($this->qnt == 0) {
+                if ($this->stockQnt == 0) {
                     $product->is_avaliable = 0;
                     $product->active = 1;
                 } else {
@@ -96,7 +96,7 @@ class Edit extends Component
 
                 }
             } elseif ($config->qntStatus == 'inactive') {
-                if ($this->qnt + 0 > 0) {
+                if ($this->stockQnt + 0 > 0) {
                     $product->active = 1;
                     $product->is_avaliable = 1;
                 } else {
