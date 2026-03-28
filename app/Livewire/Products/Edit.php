@@ -32,6 +32,7 @@ class Edit extends Component
         $this->qnt = (bool)$data->qnt;
         $this->active = (bool)$data->active;
         $this->is_avaliable = (bool) $data->is_avaliable;
+        $this->stockQnt = $data->qnt;
     }
 
 
