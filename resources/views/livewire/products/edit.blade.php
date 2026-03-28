@@ -78,7 +78,7 @@
                                         class="opacity-0 pointer-events-none transition-all duration-300 ease-in-out">
                                         <label for="stockQnt"
                                             class="block text-sm font-medium text-gray-700 mb-1">الكمية</label>
-                                        <input wire:model="stockQnt" name="stockQnt" type="number"
+                                        <input wire:model="stockQnt" name="qnt" type="number"
                                             class="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                                             id="stockQnt" placeholder="الكمية بالمخزن" value="{{ $data->qnt }}">
                                     </div>
