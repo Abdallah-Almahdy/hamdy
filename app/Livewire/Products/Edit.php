@@ -106,9 +106,15 @@ class Edit extends Component
                 $product->is_avaliable = 0;
                 $product->active = 0;
             }
-        } elseif ($this->is_avaliable == 0 || $this->stockQnt == 0) {
-            $this->stockQnt = 0;
-            $this->is_avaliable = 0;
+        } elseif ($this->is_avaliable == 0) {
+
+            $product->qnt = 0;
+            $product->is_avaliable = 0;
+
+        }elseif ($this->is_avaliable == 1 ) {
+
+            $product->is_avaliable = 1;
+            $product->qnt  = 1;
         }
 
 
