@@ -94,7 +94,6 @@ class Edit extends Component
                     $product->active = 1;
                 } else {
                     $product->is_avaliable = $this->is_avaliable;
-
                 }
             } elseif ($config->qntStatus == 'inactive') {
                 if ($this->stockQnt + 0 > 0) {
@@ -107,9 +106,9 @@ class Edit extends Component
                 $product->is_avaliable = 0;
                 $product->active = 0;
             }
+        } elseif ($this->is_avaliable == 0) {
+            $this->stockQnt = 0;
         }
-
-
 
 
 
