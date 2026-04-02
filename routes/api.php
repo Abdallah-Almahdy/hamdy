@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\productsController;
 use App\Http\Controllers\Api\rateController;
 use App\Http\Controllers\Api\sectionsController;
 use App\Http\Controllers\Api\prompCodeController;
-use App\Http\Controllers\Api\companisController;
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -29,8 +29,6 @@ Route::get('product_info', [productsController::class, 'product_info']);
 Route::get('products', [productsController::class, 'get_all_products']);
 
 
-Route::get('brands', [companisController::class, 'get_all_brands']);
-Route::get('brand_products', [companisController::class, 'get_all_brand_products']);
 
 Route::get('categories/{id}', [sectionsController::class, 'get_category']);
 Route::get('categories', [sectionsController::class, 'get_all_categories']);
@@ -46,7 +44,7 @@ Route::post('testPhoto', [sectionsController::class, 'testPhoto']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/reset_pass', [AuthController::class, 'reset_pass']);
 // Login route
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login',  [AuthController::class, 'login']);
 Route::get('get_user_data', [AuthController::class, 'get_user_data']);
 Route::post('update_user_data', [AuthController::class, 'update_user_data']);
 Route::post('send_user_photo', [AuthController::class, 'send_user_photo']);
