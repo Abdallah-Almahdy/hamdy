@@ -13,11 +13,13 @@ use App\Http\Controllers\Api\rateController;
 use App\Http\Controllers\Api\sectionsController;
 use App\Http\Controllers\Api\prompCodeController;
 use App\Http\Controllers\Api\companisController;
+use App\Http\Controllers\ConfigController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::get('configs', [ConfigController::class, 'index']);
 
 Route::get('products_best_sellers', [productsController::class, 'get_best_sellers']);
 Route::get('products_offer_rate', [productsController::class, 'get_offer_rate']);
@@ -29,8 +31,8 @@ Route::get('product_info', [productsController::class, 'product_info']);
 Route::get('products', [productsController::class, 'get_all_products']);
 
 
-Route::get('brands', [companisController::class, 'get_all_brands']);
-Route::get('brand_products', [companisController::class, 'get_all_brand_products']);
+// Route::get('brands', [companisController::class, 'get_all_brands']);
+// Route::get('brand_products', [companisController::class, 'get_all_brand_products']);
 
 Route::get('categories/{id}', [sectionsController::class, 'get_category']);
 Route::get('categories', [sectionsController::class, 'get_all_categories']);
