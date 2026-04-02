@@ -11,6 +11,11 @@ class Config extends Model
     protected $fillable = [
         'withQnt',
         'qntStatus',
+        'color',
+        'maintenance_mode',
+        'maintenance_message',
+        'min_supported_version',
+        'exact_blocked_version',
     ];
 
 }
