@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\productsController;
 use App\Http\Controllers\Api\rateController;
 use App\Http\Controllers\Api\sectionsController;
 use App\Http\Controllers\Api\prompCodeController;
-
+use App\Http\Controllers\Api\companisController;
 use App\Http\Controllers\ConfigController;
 
 
