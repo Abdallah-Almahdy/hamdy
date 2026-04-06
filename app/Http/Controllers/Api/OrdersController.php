@@ -162,6 +162,7 @@ class OrdersController extends Controller
             'userAddress' => 'required',
             'orderPaymentMethod' => 'required',
             'orderProducts' => 'required|array',
+            'orderProducts.*.productId' => 'required|integer',
         ]);
 
 
