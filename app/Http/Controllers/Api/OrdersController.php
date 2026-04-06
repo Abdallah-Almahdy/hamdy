@@ -156,6 +156,14 @@ class OrdersController extends Controller
         }
 
 
+        $request->validate([
+            'user_id' => 'required',
+            'orderTotalPrice' => 'required',
+            'userAddress' => 'required',
+            'orderPaymentMethod' => 'required',
+            'orderProducts' => 'required|array',
+        ]);
+
 
         $user = User::find($request->user_id);
         if ($user) {
@@ -180,6 +188,7 @@ class OrdersController extends Controller
                 'status' => 0,
             ];
             orderTracking::create($order_tracking_data);
+
 
 
             // $products = [];
@@ -266,7 +275,7 @@ class OrdersController extends Controller
                             "offer_rate" => $productInfo->offer_rate,
                             "unit_name" => 'ج.م',
                             "image" => env('IMG_BASE_LINK') . $productInfo->photo,
-                           
+
                         ],
                         'quantity' => $product->totalCount
                     ];
