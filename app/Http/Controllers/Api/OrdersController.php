@@ -266,7 +266,7 @@ class OrdersController extends Controller
                             "offer_rate" => $productInfo->offer_rate,
                             "unit_name" => 'ج.م',
                             "image" => env('IMG_BASE_LINK') . $productInfo->photo,
-                            "category" => $category->name,
+                           
                         ],
                         'quantity' => $product->totalCount
                     ];
