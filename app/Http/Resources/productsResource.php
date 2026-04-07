@@ -26,7 +26,8 @@ class productsResource extends JsonResource
             'unit_name' => 'ج.م',
             'purchase_count' => $this->purchase_count,
             'offer_rate' => $this->offer_rate,
-            
+            'category' => $this->subSection ? $this->subSection->name : null,
+
         ];
     }
 }

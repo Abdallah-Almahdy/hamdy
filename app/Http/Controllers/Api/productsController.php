@@ -68,7 +68,7 @@ class productsController extends Controller
         return  productsResource::collection($data);
     }
 
-    
+
     public function get_offer_rate()
     {
         $data =  product::where('offer_rate', '>', 0)->orderBy('offer_rate', 'desc')->get();
@@ -92,10 +92,12 @@ class productsController extends Controller
 
         switch ($request->query('type')) {
             case '1':
-                $data =  product::where('bar_code', 'LIKE', "%{$request->query('search_value')}%")->get();
+                $data =  product::where('bar_code', 'LIKE', "%{$request->query('search_value')}%")
+                ->where('active', 1)
+                ->get();
                 break;
             case '2':
-                $data =  product::where('name', 'LIKE', "%{$request->query('search_value')}%")->get();
+                $data =  product::where('name', 'LIKE', "%{$request->query('search_value')}%")->where('active', 1)->get();
                 break;
             default:
                 $data =  [];
