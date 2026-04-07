@@ -63,7 +63,8 @@ class productsController extends Controller
 
     public function get_best_sellers()
     {
-        $data =  product::where('best_saller', '=', 1)->get();
+        $data =  product::where('active', 1)
+            ->where('best_saller', '=', 1)->get();
 
         return  productsResource::collection($data);
     }
@@ -71,7 +72,10 @@ class productsController extends Controller
 
     public function get_offer_rate()
     {
-        $data =  product::where('offer_rate', '>', 0)->orderBy('offer_rate', 'desc')->get();
+        $data =  product::where('active', 1)
+            ->where('offer_rate', '>', 0)
+            ->orderBy('offer_rate', 'desc')
+            ->get();
 
         if (!isset($data[0])) {
             return  response()->json([
