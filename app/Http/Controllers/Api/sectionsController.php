@@ -36,7 +36,7 @@ class sectionsController extends Controller
     }
     public function get_all_category_products(Request $request)
     {
-        $data = product::where('section_id', $request->query('cat_id'))->get();
+        $data = product::where('active', 1)->where('section_id', $request->query('cat_id'))->get();
 
 
 
@@ -119,7 +119,7 @@ class sectionsController extends Controller
         // Loop through each sub-section and get the associated products
         foreach ($sub_sections as $sub_section) {
             // Get the products for the current sub-section
-            $section_products = product::where('section_id', $sub_section->id)->get();
+            $section_products = product::where('active', 1)->where('section_id', $sub_section->id)->get();
 
             // If products exist for this sub-section, apply the ProductResource and merge them into the $allProducts array
             if ($section_products->isNotEmpty()) {
