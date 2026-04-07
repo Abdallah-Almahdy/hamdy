@@ -264,7 +264,9 @@ class OrdersController extends Controller
 
                 foreach ($Products as $product) {
                     $productInfo = product::find($product->product_id);
+                  	
                     $category = subSection::find($productInfo->section_id);
+                  	
 
 
                     $orderProducts[] =  [
@@ -276,7 +278,7 @@ class OrdersController extends Controller
                             "offer_rate" => $productInfo->offer_rate,
                             "unit_name" => 'ج.م',
                             "image" => env('IMG_BASE_LINK') . $productInfo->photo,
-                            "category" => $category->name ?? 'لا يوجد',
+                          	"category" => $category->name ?? 'لا يوجد',
 
                         ],
                         'quantity' => $product->totalCount
